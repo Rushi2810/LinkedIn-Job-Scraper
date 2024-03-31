@@ -10,7 +10,7 @@ import json
 
 class JobSearch:
     def __init__(self, data) -> None:
-        """parameter initialization"""
+        """Initialize my attributes and create a Chrome driver."""
         self.email = data["email"]
         self.password = data["password"]
         self.keyword = data["keyword"]
@@ -19,6 +19,7 @@ class JobSearch:
         self.driver = webdriver.Chrome()
 
     def login(self):
+        """Log me in to LinkedIn using my provided credentials."""  
         self.driver.get("https://www.linkedin.com/login")
         try:
             email = self.driver.find_element(By.ID, "username")
@@ -36,6 +37,7 @@ class JobSearch:
             print("Error occurred during login:", e)
 
     def search_jobs(self):
+        """Navigate to LinkedIn's job search page and conduct a search using my keyword and city."""
         search_box = self.driver.find_element(By.XPATH,"//*[contains(@id,'jobs-search-box-keyword-id')]")
         search_box.click()
         search_box.send_keys(self.keyword)
@@ -57,18 +59,16 @@ class JobSearch:
 
 
     def find_jobs(self):
-    
+        """Locate and extract job information (title, company, location, URL) from the search results page."""
         parent_container = WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, "scaffold-layout__list-container"))
         )
         
-        # Find all 'a' elements within the parent container
+       
         a_elements = parent_container.find_elements(By.XPATH, ".//a[contains(@class, 'job-card-container__link')]")
         
-        # Find all 'div' elements with class 'artdeco-entity-lockup__subtitle' within the parent container
         company_name_div_elements = parent_container.find_elements(By.CLASS_NAME, 'artdeco-entity-lockup__subtitle')
 
-        # Find all 'div' elements with class 'class="artdeco-entity-lockup__caption' within the parent container
         location_div_elements = parent_container.find_elements(By.CLASS_NAME,'artdeco-entity-lockup__caption')
 
         with open('python_job_applications.json', 'a') as json_file:
@@ -122,6 +122,7 @@ class JobSearch:
 
     
     def close_session(self):
+        """Close the browser window to clean up resources."""
         try:
             self.driver.quit()  # Close the browser session
             print("Browser session closed successfully.")
@@ -132,6 +133,7 @@ class JobSearch:
 
 
     def fetch_jobs(self):
+        """Execute the job search tasks in sequence: maximize window, login, search, find jobs, close session."""
         self.driver.maximize_window()
         try:
             self.login()
@@ -147,6 +149,7 @@ class JobSearch:
 
 
 if __name__ == "__main__":
+    """Load configuration data, initiate a JobSearch object, and start the job search."""
     try:
         with open("config.json") as config_file:
             data = json.load(config_file)
