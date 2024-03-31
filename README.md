@@ -7,7 +7,7 @@ This project provides a Python script to automate searching for jobs on LinkedIn
 
 - [Features](#features)
 - [Requirements](#requirements)
-- [Installation](#insatllation)
+- [Installation](#installation)
 - [Usage](#usage)
 - [Video Demonstration](#video-demonstration)
 - [Addtional Notes](#additional-notes)
@@ -59,7 +59,11 @@ This project provides a Python script to automate searching for jobs on LinkedIn
 
 ## Video Demonstration
 
-[Consider adding a link to your video demonstration here, if applicable. Uploading it to a platform like YouTube or Vimeo is recommended.]
+
+https://github.com/Rushi2810/LinkedIn-Job-Scraper/assets/54360610/14895208-873a-432d-b61a-371065688066
+
+
+
 
 ## Additional Notes
 
